@@ -1,11 +1,17 @@
+# app.py
 from flask import Flask
+from controllers.usuarios_controlador import usuarios_bp
+from config import Configuracion
 
-app = Flask(__name__)
+def crear_app():
+    app = Flask(__name__)
+    app.config.from_object(Configuracion)
 
-@app.route('/')
-def home():
-    return '¡Hola, Flask en Windows 11!'
+    # Registrar blueprints
+    app.register_blueprint(usuarios_bp, url_prefix='/usuarios')
+
+    return app
 
 if __name__ == '__main__':
-    # Para desarrollo: recarga automática y debug activado
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    aplicacion = crear_app()
+    aplicacion.run(debug=True)

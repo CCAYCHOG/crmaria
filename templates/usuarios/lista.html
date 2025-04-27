@@ -1,0 +1,42 @@
+<!-- templates/usuarios/lista.html -->
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Lista de Usuarios</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in usuarios %}
+        <tr>
+            <td>{{ u.UsuarioID }}</td>
+            <td>{{ u.Nombre }}</td>
+            <td>{{ u.Apellido }}</td>
+            <td>{{ u.CorreoElectronico }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Crear Usuario</h3>
+<form method="post" action="{{ url_for('usuarios.crear_usuario') }}">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" id="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control" name="apellido" id="apellido" required>
+    </div>
+    <div class="mb-3">
+        <label for="correo" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" name="correo" id="correo">
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+</form>
+{% endblock %}
